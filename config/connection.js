@@ -15,7 +15,12 @@ types.setTypeParser(20, (val) => {
 });
 
 module.exports = {
+  // query connection for most database interactions
   query: (text, params) => {
     return pool.query(text, params);
+  },
+  // single client connection for transaction interactions
+  getClient: () => {
+    return pool.connect();
   }
 };
