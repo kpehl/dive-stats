@@ -11,7 +11,7 @@ const getDiverList = () => {
     });
 };
 
-const printDiver = ({ id, first_name, last_name, is_instructor, certification_id }) => {
+const printDiver = ({ id, first_name, last_name, is_instructor, cert_name }) => {
     const isInstructor = is_instructor ? 'Yes' : 'No';
     const diverCard = `
         <div class="col-12 col-lg-6 flex-row">
@@ -19,7 +19,7 @@ const printDiver = ({ id, first_name, last_name, is_instructor, certification_id
                 <h3 class="card-header">${first_name} ${last_name}</h3>
                 <div class="card-body flex-column col-auto">
                     <p class="text-dark">Instructor? ${isInstructor}</p>
-                    <p>Certification: ${certification_id}</p>
+                    <p>Certification: ${cert_name}</p>
                     <p><a href="/diver?id=${id}">See more stats</a></p>
                 </div>
             </div>

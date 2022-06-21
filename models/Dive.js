@@ -17,7 +17,9 @@ class Dive {
 
     getByDiverId({ id }) {
         return db.query(
-            `SELECT * FROM dives
+            `SELECT *
+            FROM dives
+            LEFT JOIN locations ON dives.location_id = locations.id
             WHERE diver_id = $1
             ORDER BY dive_date DESC`,
             [ id ]

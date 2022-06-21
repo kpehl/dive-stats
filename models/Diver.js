@@ -2,12 +2,21 @@ const db = require('../config/connection');
 
 class Diver {
     getAll() {
-        return db.query(`SELECT * FROM divers ORDER BY last_name`);
+        return db.query(
+            `SELECT *, certifications.name AS cert_name 
+            FROM divers
+            LEFT JOIN certifications ON divers.certification_id = certifications.id
+            ORDER BY last_name`
+        );
     }
 
     getOne({ id }) {
         return db.query(
-            `SELECT * FROM divers WHERE id=$1`,
+            `SELECT *, certifications.name AS cert_name
+            FROM divers
+            LEFT JOIN certifications ON divers.certification_id = certifications.id
+            WHERE divers.id=$1
+            `,
             [ id ]
         );
     }

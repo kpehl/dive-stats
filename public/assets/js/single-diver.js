@@ -31,7 +31,7 @@ function printDiver(diverData) {
     diverId = diverData.id;
     $diverName.textContent = diverData.first_name + ' ' + diverData.last_name;
     $isInstructor.innerText = 'Instructor: ' + (diverData.is_instructor ? 'Yes' : 'No');
-    $certificationId.innerText = 'Certification ID: ' + diverData.certification_id;
+    $certificationId.innerText = 'Certification: ' + diverData.cert_name;
 }
 
 const getTotalDives = () => {
@@ -92,13 +92,12 @@ const getAllDives = () => {
 
 function printAllDives(allDivesData) {
 
-    // $allDivesList.textContent = 'Testing';
-
     $allDivesList.innerHTML = allDivesData.map(dive => `
         <div class='card p-2 rounded'>
-            <h3 class="text-center text-dark">Location: ${dive.location_id}</h3>
+            <h4 class="text-center text-dark">${dive.name}</h4>
+            <h6 class="text-center text-dark">(${dive.coordinates.x}° latitude, ${dive.coordinates.y}° longitude)</h6>
             <ul>
-            <li>Date: ${dive.dive_date}</li>
+            <li>Date: ${new Date(dive.dive_date).toDateString()}</li>
             <li>Duration: ${dive.duration}</li>
             <li>Depth: ${dive.depth}</li>
             </ul>
