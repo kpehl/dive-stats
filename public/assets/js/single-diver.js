@@ -3,6 +3,7 @@ const $diverName = document.querySelector('#diver-name');
 const $isInstructor = document.querySelector('#is-instructor');
 const $certificationId = document.querySelector('#certification-id');
 const $totalDives = document.querySelector('#total-dives');
+const $allDivesList = document.querySelector('#all-dives-list');
 
 let diverId;
 
@@ -69,9 +70,48 @@ function printTotalDives(totalDivesData) {
     
 }
 
+const getAllDives = () => {
+    const searchParams = new URLSearchParams(document.location.search.substring(1));
+    const diverId = searchParams.get('id');
+
+    fetch(`/api/dives/${diverId}/bydiver/`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error({ message: 'Something went wrong!'})
+        }
+
+        return response.json();
+    })
+    .then(printAllDives)
+    .catch(err => {
+        console.error(err);
+        alert('Could not find a diver with this id. Taking you back to your previous page.');
+        window.history.back();
+    });
+}
+
+function printAllDives(allDivesData) {
+
+    // $allDivesList.textContent = 'Testing';
+
+    $allDivesList.innerHTML = allDivesData.map(dive => `
+        <div class='card p-2 rounded'>
+            <h3 class="text-center text-dark">Location: ${dive.location_id}</h3>
+            <ul>
+            <li>Date: ${dive.dive_date}</li>
+            <li>Duration: ${dive.duration}</li>
+            <li>Depth: ${dive.depth}</li>
+            </ul>
+        </div>
+    `)
+    .join('');
+
+}
+
 $backBtn.addEventListener('click', function() {
     window.history.back();
   });
 
 getDiverStats();
 getTotalDives();
+getAllDives();

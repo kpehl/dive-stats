@@ -15,6 +15,15 @@ class Dive {
         );
     }
 
+    getByDiverId({ id }) {
+        return db.query(
+            `SELECT * FROM dives
+            WHERE diver_id = $1
+            ORDER BY dive_date DESC`,
+            [ id ]
+        );
+    }
+
     create({ depth, duration, diver_id, location_id }) {
         return db.query(
             `INSERT INTO dives (depth, duration, diver_id, location_id)
