@@ -32,7 +32,8 @@ body {
   line-height: 1.5;
   font-size: 16px;
   background-image: url('../images/chase-baker-RTtUA2iBwRw-unsplash.jpg');
-  background-size: contain;
+  /* background-image: url('../images/ibrahim-mohamed-DT4S4fCze9s-unsplash.jpg'); */
+  background-size: cover;
   background-repeat: repeat-y;
   background-blend-mode: color;
   background-color: rgba(255, 255, 255, 0.65);
